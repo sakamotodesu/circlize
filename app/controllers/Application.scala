@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import models.Task
+import play.api.libs.iteratee._
 
 object Application extends Controller {
   
@@ -34,5 +35,12 @@ object Application extends Controller {
   val taskForm = Form(
     "label" -> nonEmptyText
   )
+  def circles = TODO
+  def newCircle = TODO
+  def events = TODO
+  def newEvent = TODO
+  def users = TODO
+  def newUser = TODO
+  def possibles = TODO
 }
 
