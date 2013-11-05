@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import models.Task
+import models.Circle
 import play.api.libs.iteratee._
 
 object Application extends Controller {
@@ -35,8 +36,26 @@ object Application extends Controller {
   val taskForm = Form(
     "label" -> nonEmptyText
   )
-  def circles = TODO
-  def newCircle = TODO
+
+  def circles = Action {
+    Ok(views.html.circle(Circle.all(),taskForm))
+  }
+
+  def newCircle = Action { implicit request =>
+    taskForm.bindFromRequest.fold(
+      errors => BadRequest(views.html.circle(Circle.all(),errors)),
+      label => {
+        Circle.create(label)
+        Redirect(routes.Application.circles)
+      }
+    )
+  }
+
+  def deleteCircle(id: Long) = Action {
+    Circle.delete(id)
+    Redirect(routes.Application.circles)
+  }
+
   def events = TODO
   def newEvent = TODO
   def users = TODO

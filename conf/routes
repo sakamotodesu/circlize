@@ -11,6 +11,7 @@ POST    /tasks                      controllers.Application.newTask
 POST    /tasks/:id/delete           controllers.Application.deleteTask(id: Long)
 GET     /circles                    controllers.Application.circles
 POST    /circles                    controllers.Application.newCircle
+POST    /circles/:id/delete         controllers.Application.deleteCircle(id: Long)
 GET     /events                     controllers.Application.events
 POST    /events                     controllers.Application.newEvent
 GET     /users                      controllers.Application.users

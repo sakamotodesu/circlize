@@ -1,0 +1,25 @@
+@(circles: List[Circle], taskForm: Form[String])
+
+@import helper._
+
+@main("Circle list") {
+    
+  <h1>@circles.size circle(s)</h1>
+  <ul> 
+    @circles.map{ circle => 
+      <li>
+        @circle.label
+  
+        @form(routes.Application.deleteCircle(circle.id)){
+          <input type="submit" value="Delete">
+        }
+      </li>
+    }
+  </ul>
+
+  <h2>Add a new circle</h2>
+  @form(routes.Application.newCircle){
+    @inputText(taskForm("label"))
+    <input type="submit" value="Create">
+  }
+}
