@@ -21,12 +21,12 @@ class ApplicationSpec extends Specification {
     }
     
     "render the index page" in {
-      running(FakeApplication()) {
+      running(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
         val home = route(FakeRequest(GET, "/")).get
         
-        status(home) must equalTo(OK)
+        status(home) must equalTo(SEE_OTHER)
         contentType(home) must beSome.which(_ == "text/html")
-        contentAsString(home) must contain ("Your new application is ready.")
+        contentAsString(home) must contain ("Add a new task")
       }
     }
   }
