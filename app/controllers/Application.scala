@@ -9,18 +9,18 @@ import models.Circle
 import play.api.libs.iteratee._
 
 object Application extends Controller {
-  
+
   def index = Action {
     Redirect(routes.Application.tasks)
   }
 
   def tasks = Action {
-    Ok(views.html.index(Task.all(),taskForm))
+    Ok(views.html.index(Task.all(), taskForm))
   }
 
-  def newTask = Action{ implicit request =>
+  def newTask = Action { implicit request =>
     taskForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.index(Task.all(),errors)),
+      errors => BadRequest(views.html.index(Task.all(), errors)),
       label => {
         Task.create(label)
         Redirect(routes.Application.tasks)
@@ -32,18 +32,18 @@ object Application extends Controller {
     Task.delete(id)
     Redirect(routes.Application.tasks)
   }
-  
+
   val taskForm = Form(
     "label" -> nonEmptyText
   )
 
   def circles = Action {
-    Ok(views.html.circle(Circle.all(),taskForm))
+    Ok(views.html.circle(Circle.all(), taskForm))
   }
 
   def newCircle = Action { implicit request =>
     taskForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.circle(Circle.all(),errors)),
+      errors => BadRequest(views.html.circle(Circle.all(), errors)),
       label => {
         Circle.create(label)
         Redirect(routes.Application.circles)
