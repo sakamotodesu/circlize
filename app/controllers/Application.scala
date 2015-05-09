@@ -1,17 +1,14 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.data._
+import models.{Circle, Task}
 import play.api.data.Forms._
-import models.Task
-import models.Circle
-import play.api.libs.iteratee._
+import play.api.data._
+import play.api.mvc._
 
 object Application extends Controller {
 
   def index = Action {
-    Redirect(routes.Application.tasks)
+    Redirect(routes.Application.tasks())
   }
 
   def tasks = Action {
@@ -23,14 +20,14 @@ object Application extends Controller {
       errors => BadRequest(views.html.index(Task.all(), errors)),
       label => {
         Task.create(label)
-        Redirect(routes.Application.tasks)
+        Redirect(routes.Application.tasks())
       }
     )
   }
 
   def deleteTask(id: Long) = Action {
     Task.delete(id)
-    Redirect(routes.Application.tasks)
+    Redirect(routes.Application.tasks())
   }
 
   val taskForm = Form(
@@ -46,14 +43,14 @@ object Application extends Controller {
       errors => BadRequest(views.html.circle(Circle.all(), errors)),
       label => {
         Circle.create(label)
-        Redirect(routes.Application.circles)
+        Redirect(routes.Application.circles())
       }
     )
   }
 
   def deleteCircle(id: Long) = Action {
     Circle.delete(id)
-    Redirect(routes.Application.circles)
+    Redirect(routes.Application.circles())
   }
 
   def events = TODO
