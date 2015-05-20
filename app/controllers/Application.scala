@@ -1,6 +1,6 @@
 package controllers
 
-import models.{Circle, Task}
+import models.{ Circle, Task }
 import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc._
@@ -54,9 +54,13 @@ object Application extends Controller {
   }
 
   def events = TODO
+
   def newEvent = TODO
+
   def users = TODO
+
   def newUser = TODO
+
   def possibles = TODO
 }
 
